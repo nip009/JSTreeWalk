@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="html">
+    <head>
+        <title>INF225</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <title>Testing</title>
+    <script defer src="ast.js"></script>
+    <script defer src="showJSON.js"></script>
+    <script defer src="treewalker.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+    <script>
+        function run(){
+            const walker = new MyTreeWalker(astExample2);
+            console.log(walker.getNode())
+
+            // Walk through AST
+            while(!walker.isAllNodesVisited()){
+                if(!walker.goDown()){
+                    walker.goUp();   
+                }
+            }
+
+            // Delete property on node
+            //walker.deleteProperty('body');
+
+            // Do a default walk step
+            //walker.defaultWalk();
+            //walker.defaultWalk();
+            //walker.defaultWalk();
+
+            // Replace current node
+            const newNode = {
+                name: "hello",
+                test: "test",
+            };
+            //walker.replaceCurrentNodeWith(newNode)
+
+            showJSONOnWebpage(walker.getNode())
+        }
+    </script>
+    <body>
+        <h3>
+            Example
+        </h3>
+        <pre id="astDiv">
+        </pre>
+        <button onclick={run()}>
+            Run
+        </button>
+    </body>
+</html>
